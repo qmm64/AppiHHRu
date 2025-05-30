@@ -19,14 +19,14 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return "Получение минимальной зарплаты";
         }
 
-        public override async Task<string> Execute()
-        {
-            var result = await ((SalaryManager)extraditionManager).MinSalary();
-            if (result.IsSuccess)
-            {
-                return result.MinSalary.ToString();
-            }
-            return "";
-        }
+        //public override async Task<string> Execute()
+        //{
+        //    var result = await ((SalaryManager)extraditionManager).MinSalary();
+        //    if (result.IsSuccess)
+        //    {
+        //        return result.MinSalary.ToString();
+        //    }
+        //    return "";
+        //}
     }
 }

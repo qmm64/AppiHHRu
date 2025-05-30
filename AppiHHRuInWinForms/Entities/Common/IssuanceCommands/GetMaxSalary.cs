@@ -19,14 +19,14 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return "Получение максимальной зарплаты";
         }
 
-        public override async Task<string> Execute()
-        {
-            var result = await ((SalaryManager)extraditionManager).MaxSalary();
-            if (result.IsSuccess)
-            {
-                return result.MaxSalary.ToString();
-            }
-            return "";
-        }
+        //public override async Task<string> Execute()
+        //{
+        //    var result = await ((SalaryManager)extraditionManager).MaxSalary();
+        //    if (result.IsSuccess)
+        //    {
+        //        return result.MaxSalary.ToString();
+        //    }
+        //    return "";
+        //}
     }
 }

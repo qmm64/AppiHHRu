@@ -19,14 +19,14 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return "Получение средней зарплаты";
         }
 
-        public override async Task<string> Execute()
-        {
-            var result = await ((SalaryManager)extraditionManager).ArrangeSalary();
-            if (result.IsSuccess)
-            {
-                return result.ArrangeSalary.ToString();
-            }
-            return "";
-        }
+        //public override async Task<string> Execute()
+        //{
+        //    var result = await ((SalaryManager)extraditionManager).ArrangeSalary();
+        //    if (result.IsSuccess)
+        //    {
+        //        return result.ArrangeSalary.ToString();
+        //    }
+        //    return "";
+        //}
     }
 }

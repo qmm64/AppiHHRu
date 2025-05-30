@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
 {
-    public record GetAreaResponse(bool IsSuccess, float ArrangeSalary = -1);
+    public record GetAreaResponse(bool IsSuccess, List<string> AreaResponse = null);
 }

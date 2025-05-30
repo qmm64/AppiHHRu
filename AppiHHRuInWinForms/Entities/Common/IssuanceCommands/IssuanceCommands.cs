@@ -16,9 +16,9 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return "";
         }
 
-        public virtual async Task<string> Execute()
+        public virtual async Task<List<string>> Execute()
         {
-            return "";
+            return null;
         }
 
         public override string ToString()
