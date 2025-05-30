@@ -10,14 +10,18 @@ namespace AppiHHRuInWinForms.Entities.IssuanceCommands
 {
     public class GetMaxSalary : IssuanceCommands
     {
+        public GetMaxSalary(ExtraditionManager extraditionManager) 
+        {
+            this.extraditionManager = extraditionManager;
+        }
         public override string Description()
         {
             return "Получение максимальной зарплаты";
         }
 
-        public override async Task<string> Execute(ExtraditionManager salaryManager)
+        public override async Task<string> Execute()
         {
-            var result = await ((SalaryManager)salaryManager).MaxSalary();
+            var result = await ((SalaryManager)extraditionManager).MaxSalary();
             if (result.IsSuccess)
             {
                 return result.MaxSalary.ToString();

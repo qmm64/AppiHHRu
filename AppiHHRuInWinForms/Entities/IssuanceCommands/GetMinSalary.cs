@@ -10,14 +10,18 @@ namespace AppiHHRuInWinForms.Entities.IssuanceCommands
 {
     public class GetMinSalary : IssuanceCommands
     {
+        public GetMinSalary(ExtraditionManager extraditionManager) 
+        {
+            this.extraditionManager = extraditionManager;
+        }
         public override string Description()
         {
             return "Получение минимальной зарплаты";
         }
 
-        public override async Task<string> Execute(ExtraditionManager salaryManager)
+        public override async Task<string> Execute()
         {
-            var result = await ((SalaryManager)salaryManager).MinSalary();
+            var result = await ((SalaryManager)extraditionManager).MinSalary();
             if (result.IsSuccess)
             {
                 return result.MinSalary.ToString();

@@ -13,17 +13,17 @@ namespace AppiHHRuInWinForms
         public Form1()
         {
             InitializeComponent();
-            VacantionFilterComboBox.Items.Add(new GetMinSalary());
-            VacantionFilterComboBox.Items.Add(new GetArrangeSalary());
-            VacantionFilterComboBox.Items.Add(new GetMaxSalary());
-            VacantionFilterComboBox.Items.Add(new GetFiveOnTwoSchedule());
-            VacantionFilterComboBox.Items.Add(new GetTwoOnTwoSchedule());
-            VacantionFilterComboBox.Items.Add(new GetSixOnOneSchedule());
-            VacantionFilterComboBox.Items.Add(new GetFourOnThreeSchedule());
-
             var httpClient = new HHRuHttpClient();
             salaryManager = new(httpClient);
             workScheduleManager = new(httpClient);
+
+            VacantionFilterComboBox.Items.Add(new GetMinSalary(salaryManager));
+            VacantionFilterComboBox.Items.Add(new GetArrangeSalary(salaryManager));
+            VacantionFilterComboBox.Items.Add(new GetMaxSalary(salaryManager));
+            VacantionFilterComboBox.Items.Add(new GetFiveOnTwoSchedule(workScheduleManager));
+            VacantionFilterComboBox.Items.Add(new GetTwoOnTwoSchedule(workScheduleManager));
+            VacantionFilterComboBox.Items.Add(new GetSixOnOneSchedule(workScheduleManager));
+            VacantionFilterComboBox.Items.Add(new GetFourOnThreeSchedule(workScheduleManager));
 
         }
 
@@ -37,7 +37,7 @@ namespace AppiHHRuInWinForms
                     int t = VacantionFilterComboBox.SelectedIndex;
                     Task.Run(async () =>
                     {
-                        var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute(salaryManager);
+                        var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute();
                         BeginInvoke(new Action(() =>
                         {
                             OutputListBox.Items.Add(result);

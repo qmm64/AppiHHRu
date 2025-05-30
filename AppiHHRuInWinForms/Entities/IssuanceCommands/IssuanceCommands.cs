@@ -11,12 +11,13 @@ namespace AppiHHRuInWinForms.Entities.IssuanceCommands
 {
     public abstract class IssuanceCommands
     {
+        protected ExtraditionManager extraditionManager;
         public virtual string Description()
         {
             return "";
         }
 
-        public virtual async Task<string> Execute(ExtraditionManager extraditionManager)
+        public virtual async Task<string> Execute()
         {
             return "";
         }

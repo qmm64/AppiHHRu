@@ -10,14 +10,18 @@ namespace AppiHHRuInWinForms.Entities.IssuanceCommands
 {
     internal class GetFourOnThreeSchedule : IssuanceCommands
     {
-        public virtual string Description()
+        public GetFourOnThreeSchedule(ExtraditionManager extraditionManager) 
+        {
+            this.extraditionManager = extraditionManager;
+        }
+        public override string Description()
         {
             return "Получение процента вакансий с графиков 4/3";
         }
 
-        public virtual async Task<string> Execute(ExtraditionManager workScheduleManager)
+        public override async Task<string> Execute()
         {
-            var result = await ((WorkScheduleManager)workScheduleManager).GetAllDaySchedulePercent(WorkScheduleManager.WorkScheduleFormat.FourOnThree);
+            var result = await ((WorkScheduleManager)extraditionManager).GetAllDaySchedulePercent(WorkScheduleManager.WorkScheduleFormat.FourOnThree);
             if (result.IsSuccess)
             {
                 return result.Percent.ToString();

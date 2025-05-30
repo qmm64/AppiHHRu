@@ -12,14 +12,18 @@ namespace AppiHHRuInWinForms.Entities.IssuanceCommands
 {
     public class GetFiveOnTwoSchedule : IssuanceCommands
     {
-        public virtual string Description()
+        public GetFiveOnTwoSchedule(ExtraditionManager extraditionManager) 
+        {
+            this.extraditionManager = extraditionManager;
+        }
+        public override string Description()
         {
             return "Получение процента вакансий с графиков 5/2";
         }
 
-        public virtual async Task<string> Execute(ExtraditionManager workScheduleManager)
+        public override async Task<string> Execute()
         {
-            var result = await ((WorkScheduleManager)workScheduleManager).GetAllDaySchedulePercent(WorkScheduleManager.WorkScheduleFormat.FiveOnTwo);
+            var result = await ((WorkScheduleManager)extraditionManager).GetAllDaySchedulePercent(WorkScheduleManager.WorkScheduleFormat.FiveOnTwo);
             if (result.IsSuccess)
             {
                 return result.Percent.ToString();
