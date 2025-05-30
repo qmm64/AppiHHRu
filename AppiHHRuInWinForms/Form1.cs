@@ -1,5 +1,6 @@
 using AppiHHRuInWinForms.Entities.Common;
 using AppiHHRuInWinForms.Entities.Common.IssuanceCommands;
+using AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 using System.Threading.Tasks;
@@ -10,12 +11,14 @@ namespace AppiHHRuInWinForms
     {
         private SalaryManager salaryManager;
         private WorkScheduleManager workScheduleManager;
+        private AreaManager areaManager;
         public Form1()
         {
             InitializeComponent();
             var httpClient = new HHRuHttpClient();
             salaryManager = new(httpClient);
             workScheduleManager = new(httpClient);
+            areaManager = new(httpClient);
 
             VacantionFilterComboBox.Items.Add(new GetMinSalary(salaryManager));
             VacantionFilterComboBox.Items.Add(new GetArrangeSalary(salaryManager));
@@ -24,7 +27,7 @@ namespace AppiHHRuInWinForms
             VacantionFilterComboBox.Items.Add(new GetTwoOnTwoSchedule(workScheduleManager));
             VacantionFilterComboBox.Items.Add(new GetSixOnOneSchedule(workScheduleManager));
             VacantionFilterComboBox.Items.Add(new GetFourOnThreeSchedule(workScheduleManager));
-
+            VacantionFilterComboBox.Items.Add(new GetAreas(areaManager));
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -40,7 +43,7 @@ namespace AppiHHRuInWinForms
                         var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute();
                         BeginInvoke(new Action(() =>
                         {
-                            OutputListBox.Items.Add(result);
+                            OutputListBox.Items.AddRange(result.ToArray());
                         }));
                     });
 

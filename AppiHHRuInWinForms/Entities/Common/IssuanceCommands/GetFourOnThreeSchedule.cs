@@ -19,14 +19,14 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return "Получение процента вакансий с графиков 4/3";
         }
 
-        public override async Task<string> Execute()
-        {
-            var result = await ((WorkScheduleManager)extraditionManager).GetAllDaySchedulePercent(WorkScheduleManager.WorkScheduleFormat.FourOnThree);
-            if (result.IsSuccess)
-            {
-                return result.Percent.ToString();
-            }
-            return "";
-        }
+        //public override async Task<string> Execute()
+        //{
+        //    var result = await ((WorkScheduleManager)extraditionManager).GetAllDaySchedulePercent(WorkScheduleManager.WorkScheduleFormat.FourOnThree);
+        //    if (result.IsSuccess)
+        //    {
+        //        return result.Percent.ToString();
+        //    }
+        //    return "";
+        //}
     }
 }
