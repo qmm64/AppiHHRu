@@ -27,7 +27,7 @@ public class HHRuHttpClient
         {
             var result = await HHHttpClient.GetAsync(HHAppiUrl+ "vacancies");
             var responce = await result.Content.ReadAsStringAsync();
-            var vacancyResponse = JsonSerializer.Deserialize<VacancyResponse>(responce);
+            var vacancyResponse = JsonSerializer.Deserialize<VacanciesResponse>(responce);
             if (vacancyResponse == null)
             {
                 Console.WriteLine("Не удалось распарсить вакансии!");

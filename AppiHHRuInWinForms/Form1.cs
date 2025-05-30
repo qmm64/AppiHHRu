@@ -1,4 +1,4 @@
-using AppiHHru;
+using AppiHHRuInWinForms.Entities.Common;
 using AppiHHRuInWinForms.Entities.Common.IssuanceCommands;
 using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;

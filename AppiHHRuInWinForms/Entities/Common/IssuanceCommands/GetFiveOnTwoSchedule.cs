@@ -1,6 +1,4 @@
-﻿using AppiHHru;
-using AppiHHru.Entities.Common.SalaryManagerP;
-using AppiHHRuInWinForms.Entities.Common.Responses;
+﻿using AppiHHRuInWinForms.Entities.Common.Responses;
 using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 using System;
 using System.Collections.Generic;

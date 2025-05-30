@@ -3,4 +3,4 @@ using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses;
 
-public record GetAnyVacanciesResponse(bool IsSuccess, VacancyResponse VacancyResponce = null);
+public record GetAnyVacanciesResponse(bool IsSuccess, VacanciesResponse VacancyResponce = null);

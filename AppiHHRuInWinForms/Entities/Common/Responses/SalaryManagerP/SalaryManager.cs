@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
 
@@ -12,7 +13,7 @@ public class SalaryManager:ExtraditionManager
     {
     }
 
-    private List<long> GetSalaries(VacancyResponse vacancyResponse)
+    private List<long> GetSalaries(VacanciesResponse vacancyResponse)
     {
 
         var salary = new List<long>();

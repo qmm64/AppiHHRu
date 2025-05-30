@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse
 {
-    public class VacancyResponse
+    public class VacanciesResponse
     {
         [JsonPropertyName("items")]
         public Vacancy[]? Vacancies {  get; set; }
