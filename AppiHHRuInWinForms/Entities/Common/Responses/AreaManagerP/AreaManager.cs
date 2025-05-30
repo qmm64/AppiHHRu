@@ -10,6 +10,7 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
     {
         public AreaManager(HHRuHttpClient hHRuHttpClient) : base(hHRuHttpClient)
         {
+
         }
     }
 }
