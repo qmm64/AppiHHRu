@@ -1,7 +1,7 @@
 using AppiHHru;
-using AppiHHru.Entities.Common.SalaryManagerP;
-using AppiHHru.Entities.Common.WorkScheduleManagerP;
-using AppiHHRuInWinForms.Entities.IssuanceCommands;
+using AppiHHRuInWinForms.Entities.Common.IssuanceCommands;
+using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
+using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms
