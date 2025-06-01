@@ -27,7 +27,7 @@ internal class WorkScheduleManager : ExtraditionManager
         var responce = await _httpClient.GetAnyVacancies();
         if (!responce.IsSuccess)
         {
-            Console.WriteLine("Не удалось распарсить вакансии");
+            MessageBox.Show("Не удалось распарсить вакансии");
             return new GetAllDaySchedulePercentResponce(false);
         }
         List<string> daySchedules = new();
@@ -35,35 +35,8 @@ internal class WorkScheduleManager : ExtraditionManager
         {
             var countAllDaySchefule = responce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.WorkScheduleByDaysId == format));
             double allDayPercent = (double)countAllDaySchefule / (double)responce.Vacancies.Count * 100;
-            daySchedules.Add($"График {WorkScheduleFormats[format]} - {countAllDaySchefule}, процент от общего числа: {allDayPercent}");
+            daySchedules.Add($"График {WorkScheduleFormats[format]} - {countAllDaySchefule} вакансий, процент от общего числа: {allDayPercent}");
         }
         return new GetAllDaySchedulePercentResponce(true, daySchedules);
-    }
-
-    public enum WorkScheduleFormat
-    {
-        FiveOnTwo,
-        TwoOnTwo,
-        SixOnOne,
-        FourOnThree,
-        ThreeOnTwo,
-    }
-
-    private string ConvertWorkScheduleFormatToString(WorkScheduleFormat workScheduleFormat)
-    {
-        switch (workScheduleFormat)
-        {
-            case WorkScheduleFormat.FiveOnTwo:
-                return "FIVE_ON_TWO_OFF";
-            case WorkScheduleFormat.TwoOnTwo:
-                return "TWO_ON_TWO_OFF";
-            case WorkScheduleFormat.SixOnOne:
-                return "SIX_ON_ONE_OFF";
-            case WorkScheduleFormat.FourOnThree:
-                return "FOUR_ON_THREE_OFF";
-            case WorkScheduleFormat.ThreeOnTwo:
-                return "THREE_ON_TWO_OFF";
-        }
-        return "";
     }
 }

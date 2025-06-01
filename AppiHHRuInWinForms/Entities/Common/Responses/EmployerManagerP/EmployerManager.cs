@@ -36,7 +36,7 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP
             var responce = await _httpClient.GetAnyVacancies();
             if (!responce.IsSuccess)
             {
-                Console.WriteLine("Не удалось распарсить вакансии");
+                MessageBox.Show("Не удалось распарсить вакансии");
                 return new GetEmployerResponse(false);
             }
             Dictionary<string, int> areas = GetEmployers(responce.Vacancies);

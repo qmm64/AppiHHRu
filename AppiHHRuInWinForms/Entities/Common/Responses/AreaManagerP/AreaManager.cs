@@ -37,7 +37,7 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
             var responce = await _httpClient.GetAnyVacancies();
             if (!responce.IsSuccess)
             {
-                Console.WriteLine("Не удалось распарсить вакансии");
+                MessageBox.Show("Не удалось распарсить вакансии");
                 return new GetAreaResponse(false);
             }
             Dictionary<string, int> areas = GetTypesOfArea(responce.Vacancies);
