@@ -21,8 +21,8 @@ internal class WorkScheduleManager : ExtraditionManager
             Console.WriteLine("Не удалось распарсить вакансии");
             return new GetAllDaySchedulePercentResponce(false);
         }
-        var countAllDaySchefule = responce.VacancyResponce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.WorkScheduleByDaysId == ConvertWorkScheduleFormatToString(workScheduleFormat)));
-        double allDayPercent = (double)countAllDaySchefule / (double)responce.VacancyResponce.Vacancies.Length * 100;
+        var countAllDaySchefule = responce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.WorkScheduleByDaysId == ConvertWorkScheduleFormatToString(workScheduleFormat)));
+        double allDayPercent = (double)countAllDaySchefule / (double)responce.Vacancies.Count * 100;
         return new GetAllDaySchedulePercentResponce(true, allDayPercent);
     }
 

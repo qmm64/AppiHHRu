@@ -14,10 +14,10 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP
         {
         }
 
-        private Dictionary<string, int> GetEmployers(VacanciesResponse vacanciesResponse)
+        private Dictionary<string, int> GetEmployers(List<Vacancy> vacancies)
         {
             Dictionary<string, int> employers = new Dictionary<string, int>();
-            foreach (var vacancy in vacanciesResponse.Vacancies)
+            foreach (var vacancy in vacancies)
             {
                 if (employers.Keys.Any(n => n == vacancy.Employer.Name))
                 {
@@ -39,11 +39,11 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP
                 Console.WriteLine("Не удалось распарсить вакансии");
                 return new GetEmployerResponse(false);
             }
-            Dictionary<string, int> areas = GetEmployers(responce.VacancyResponce);
+            Dictionary<string, int> areas = GetEmployers(responce.Vacancies);
             List<string> areaResponse = new();
             foreach (var key in areas.Keys)
             {
-                areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {(float)areas[key] / (float)responce.VacancyResponce.Vacancies.Length * 100}%");
+                areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {(float)areas[key] / (float)responce.Vacancies.Count * 100}%");
             }
             return new GetEmployerResponse(true, areaResponse);
         }

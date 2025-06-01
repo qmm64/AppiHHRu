@@ -32,9 +32,12 @@
             VacantionFilterComboBox = new ComboBox();
             label1 = new Label();
             panel1 = new Panel();
+            CountOfPagesNumericUpDown = new NumericUpDown();
+            label3 = new Label();
             OkButton = new Button();
             label2 = new Label();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // OutputListBox
@@ -42,13 +45,13 @@
             OutputListBox.FormattingEnabled = true;
             OutputListBox.Location = new Point(895, 136);
             OutputListBox.Name = "OutputListBox";
-            OutputListBox.Size = new Size(929, 374);
+            OutputListBox.Size = new Size(929, 744);
             OutputListBox.TabIndex = 0;
             // 
             // VacantionFilterComboBox
             // 
             VacantionFilterComboBox.FormattingEnabled = true;
-            VacantionFilterComboBox.Location = new Point(12, 55);
+            VacantionFilterComboBox.Location = new Point(19, 161);
             VacantionFilterComboBox.Name = "VacantionFilterComboBox";
             VacantionFilterComboBox.Size = new Size(627, 45);
             VacantionFilterComboBox.TabIndex = 1;
@@ -64,6 +67,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(CountOfPagesNumericUpDown);
+            panel1.Controls.Add(label3);
             panel1.Controls.Add(OkButton);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(VacantionFilterComboBox);
@@ -72,6 +77,25 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(781, 950);
             panel1.TabIndex = 3;
+            // 
+            // CountOfPagesNumericUpDown
+            // 
+            CountOfPagesNumericUpDown.Location = new Point(19, 49);
+            CountOfPagesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            CountOfPagesNumericUpDown.Name = "CountOfPagesNumericUpDown";
+            CountOfPagesNumericUpDown.Size = new Size(102, 43);
+            CountOfPagesNumericUpDown.TabIndex = 5;
+            CountOfPagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            CountOfPagesNumericUpDown.ValueChanged += CountOfPagesNumericUpDown_ValueChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(30, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(456, 37);
+            label3.TabIndex = 4;
+            label3.Text = "Количество страниц для аналитики";
             // 
             // OkButton
             // 
@@ -86,7 +110,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(23, 7);
+            label2.Location = new Point(30, 113);
             label2.Name = "label2";
             label2.Size = new Size(200, 37);
             label2.TabIndex = 2;
@@ -104,6 +128,7 @@
             Text = "Form1";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,5 +141,7 @@
         private Panel panel1;
         private Button OkButton;
         private Label label2;
+        private NumericUpDown CountOfPagesNumericUpDown;
+        private Label label3;
     }
 }

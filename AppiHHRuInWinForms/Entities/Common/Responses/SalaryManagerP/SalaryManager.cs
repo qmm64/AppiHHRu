@@ -13,12 +13,12 @@ public class SalaryManager:ExtraditionManager
     {
     }
 
-    private List<long> GetSalaries(VacanciesResponse vacancyResponse)
+    private List<long> GetSalaries(List<Vacancy> Vacancies)
     {
 
         var salary = new List<long>();
 
-        foreach (var vacancy in vacancyResponse.Vacancies)
+        foreach (var vacancy in Vacancies)
         {
             if (vacancy?.SalaryRange?.Mode?.SalaryRangeModeId == "MONTH")
             {
@@ -35,14 +35,14 @@ public class SalaryManager:ExtraditionManager
     {
         try
         {
-            var response = await _httpClient.GetAnyVacancies();
+            var response = await _httpClient.GetAnyVacancies(true);
             if (!response.IsSuccess)
             {
                 Console.WriteLine("Не удалось рассчитать максимальную зарплату");
                 return new GetMaxSalaryResponse(false);
             }
 
-            var salary = GetSalaries(response.VacancyResponce);
+            var salary = GetSalaries(response.Vacancies);
             return new GetMaxSalaryResponse(true, salary.Max());
         }
         catch (Exception ex)
@@ -56,14 +56,14 @@ public class SalaryManager:ExtraditionManager
     {
         try
         {
-            var response = await _httpClient.GetAnyVacancies();
+            var response = await _httpClient.GetAnyVacancies(true);
             if (!response.IsSuccess)
             {
                 Console.WriteLine("Не удалось рассчитать минимальную зарплату");
                 return new GetMinSalaryResponse(false);
             }
 
-            var salary = GetSalaries(response.VacancyResponce);
+            var salary = GetSalaries(response.Vacancies);
             return new GetMinSalaryResponse(true, salary.Min());
         }
         catch (Exception ex)
@@ -77,14 +77,14 @@ public class SalaryManager:ExtraditionManager
     {
         try
         {
-            var response = await _httpClient.GetAnyVacancies();
+            var response = await _httpClient.GetAnyVacancies(true);
             if (!response.IsSuccess)
             {
                 Console.WriteLine("Не удалось рассчитать среднюю зарплату");
                 return new GetArrangeResponse(false);
             }
 
-            var salary = GetSalaries(response.VacancyResponce);
+            var salary = GetSalaries(response.Vacancies);
             return new GetArrangeResponse(true, salary.Sum()/(float)salary.Count);
         }
         catch (Exception ex)

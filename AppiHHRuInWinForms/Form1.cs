@@ -14,15 +14,17 @@ namespace AppiHHRuInWinForms
         private WorkScheduleManager workScheduleManager;
         private AreaManager areaManager;
         private EmployerManager employerManager;
+        private int countOfPages;
         public Form1()
         {
             InitializeComponent();
-            var httpClient = new HHRuHttpClient();
-            salaryManager = new(httpClient);
-            workScheduleManager = new(httpClient);
-            areaManager = new(httpClient);
-            employerManager = new(httpClient);
+            CreateManagers();
+            FillComboBox();
+        }
 
+        private void FillComboBox()
+        {
+            VacantionFilterComboBox.Items.Clear();
             VacantionFilterComboBox.Items.Add(new GetMinSalary(salaryManager));
             VacantionFilterComboBox.Items.Add(new GetArrangeSalary(salaryManager));
             VacantionFilterComboBox.Items.Add(new GetMaxSalary(salaryManager));
@@ -34,11 +36,29 @@ namespace AppiHHRuInWinForms
             VacantionFilterComboBox.Items.Add(new GetEmployers(employerManager));
         }
 
+        private void CreateManagers()
+        {
+            var httpClient = new HHRuHttpClient();
+            httpClient.SetCountOfPages((int)CountOfPagesNumericUpDown.Value);
+            countOfPages = httpClient.GetCountOfPages();
+            salaryManager = new(httpClient);
+            workScheduleManager = new(httpClient);
+            areaManager = new(httpClient);
+            employerManager = new(httpClient);
+        }
+
         private void OkButton_Click(object sender, EventArgs e)
         {
             if (VacantionFilterComboBox.SelectedIndex != -1)
             {
-                OutputListBox.Items.Clear();    
+                int selectedIndex = VacantionFilterComboBox.SelectedIndex;
+                if (CountOfPagesNumericUpDown.Value != countOfPages)
+                {
+                    CreateManagers();
+                    FillComboBox();
+                    VacantionFilterComboBox.SelectedIndex = selectedIndex;
+                }
+                OutputListBox.Items.Clear();
                 try
                 {
                     int t = VacantionFilterComboBox.SelectedIndex;
@@ -47,7 +67,14 @@ namespace AppiHHRuInWinForms
                         var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute();
                         BeginInvoke(new Action(() =>
                         {
-                            OutputListBox.Items.AddRange(result.ToArray());
+                            if (result == null)
+                            {
+                                MessageBox.Show("Превышено время ожидания сервера");
+                            }
+                            else
+                            {
+                                OutputListBox.Items.AddRange(result.ToArray());
+                            }
                         }));
                     });
 
@@ -57,6 +84,11 @@ namespace AppiHHRuInWinForms
                     OutputListBox.Items.Add($"Ошибка вывода. Текст: {ex.Message}");
                 }
             }
+        }
+
+        private void CountOfPagesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

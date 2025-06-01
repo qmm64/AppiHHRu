@@ -15,10 +15,10 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
         {
         }
 
-        private Dictionary<string,int> GetTypesOfArea(VacanciesResponse vacanciesResponse) 
+        private Dictionary<string,int> GetTypesOfArea(List<Vacancy> vacancies) 
         {
             Dictionary<string,int> areas = new Dictionary<string,int>();
-            foreach (var vacancy in vacanciesResponse.Vacancies)
+            foreach (var vacancy in vacancies)
             {
                 if (areas.Keys.Any(n => n == vacancy.Area.Name))
                 {
@@ -40,11 +40,11 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
                 Console.WriteLine("Не удалось распарсить вакансии");
                 return new GetAreaResponse(false);
             }
-            Dictionary<string, int> areas = GetTypesOfArea(responce.VacancyResponce);
+            Dictionary<string, int> areas = GetTypesOfArea(responce.Vacancies);
             List<string> areaResponse = new();
             foreach (var key in areas.Keys)
             {
-                areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {(float)areas[key] / (float)responce.VacancyResponce.Vacancies.Length * 100}%");
+                areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {(float)areas[key] / (float)responce.Vacancies.Count * 100}%");
             }
             return new GetAreaResponse(true, areaResponse);
         }

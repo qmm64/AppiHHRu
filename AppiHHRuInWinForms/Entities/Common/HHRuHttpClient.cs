@@ -14,6 +14,7 @@ public class HHRuHttpClient
 
     private const string HHAppiUrl = "https://api.hh.ru/";
     private HttpClient HHHttpClient;
+    private int countOfPages = 1;
 
     public HHRuHttpClient()
     {
@@ -21,24 +22,39 @@ public class HHRuHttpClient
         HHHttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("HHVacFinder");
         HHHttpClient.Timeout = TimeSpan.FromSeconds(10);
     }
-    public async Task<GetAnyVacanciesResponse> GetAnyVacancies() 
+    public async Task<GetAnyVacanciesResponse> GetAnyVacancies(bool dependsOnSalary = false) 
     {
         try
         {
-            var result = await HHHttpClient.GetAsync(HHAppiUrl+ "vacancies");
-            var responce = await result.Content.ReadAsStringAsync();
-            var vacancyResponse = JsonSerializer.Deserialize<VacanciesResponse>(responce);
-            if (vacancyResponse == null)
+            var vacancies = new List<Vacancy>();
+            for (int i = 0; i < countOfPages; i++)
             {
-                Console.WriteLine("Не удалось распарсить вакансии!");
-                return new GetAnyVacanciesResponse(false);
+                var result = await HHHttpClient.GetAsync(HHAppiUrl + $"vacancies?area=113&page={i}&only_with_salary={dependsOnSalary}");
+                var responce = await result.Content.ReadAsStringAsync();
+                vacancies.AddRange(JsonSerializer.Deserialize<VacanciesResponse>(responce).Vacancies);
+                if (vacancies == null)
+                {
+                    Console.WriteLine("Не удалось распарсить вакансии!");
+                    return new GetAnyVacanciesResponse(false);
+                }
             }
-            return new GetAnyVacanciesResponse(true,vacancyResponse);
+            Task.WhenAll();
+            return new GetAnyVacanciesResponse(true,vacancies);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Произошла ошибка при выполнении {nameof(GetAnyVacancies)}. Текст исключение: {ex.Message}");
             return new GetAnyVacanciesResponse(false);
         }
+    }
+
+    public void SetCountOfPages(int countOfPages)
+    {
+        this.countOfPages = countOfPages;
+    }
+
+    public int GetCountOfPages()
+    {
+        return countOfPages;
     }
 }
