@@ -13,10 +13,10 @@ public class SalaryManager:ExtraditionManager
     {
     }
 
-    private List<long> GetSalaries(List<Vacancy> Vacancies)
+    private List<int> GetSalaries(List<Vacancy> Vacancies)
     {
 
-        var salary = new List<long>();
+        var salary = new List<int>();
 
         foreach (var vacancy in Vacancies)
         {
@@ -31,66 +31,89 @@ public class SalaryManager:ExtraditionManager
         return salary;
     }
 
-    public async Task<GetMaxSalaryResponse> MaxSalary()
+    private string MaxSalary(List<int> salaries)
     {
         try
         {
-            var response = await _httpClient.GetAnyVacancies(true);
-            if (!response.IsSuccess)
-            {
-                Console.WriteLine("Не удалось рассчитать максимальную зарплату");
-                return new GetMaxSalaryResponse(false);
-            }
-
-            var salary = GetSalaries(response.Vacancies);
-            return new GetMaxSalaryResponse(true, salary.Max());
+            return salaries.Max().ToString();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка расчёта максимальной зарплаты: {ex.Message}");
-            return new GetMaxSalaryResponse(false);
+            MessageBox.Show($"Ошибка расчёта максимальной зарплаты: {ex.Message}");
+            return "Ошибка расчёта";
         }
     } 
 
-    public async Task<GetMinSalaryResponse> MinSalary()
+    private string MinSalary(List<int> salaries)
     {
         try
         {
-            var response = await _httpClient.GetAnyVacancies(true);
-            if (!response.IsSuccess)
-            {
-                Console.WriteLine("Не удалось рассчитать минимальную зарплату");
-                return new GetMinSalaryResponse(false);
-            }
 
-            var salary = GetSalaries(response.Vacancies);
-            return new GetMinSalaryResponse(true, salary.Min());
+            return salaries.Min().ToString();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка расчёта минимальной зарплаты: {ex.Message}");
-            return new GetMinSalaryResponse(false);
+            MessageBox.Show($"Ошибка расчёта минимальной зарплаты: {ex.Message}");
+            return "Ошибка расчёта";
         }
     }
 
-    public async Task<GetArrangeResponse> ArrangeSalary()
+    private string ArrangeSalary(List<int> salaries)
+    {
+        try
+        {
+            return (salaries.Sum()/(float)salaries.Count).ToString();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка расчёта средней зарплаты: {ex.Message}");
+            return "Ошибка расчёта";
+        }
+    }
+
+    private string MedianSalary(List<int> salaries)
+    {
+        try
+        {
+            salaries.Sort();
+            if (salaries.Count % 2 != 0)
+            {
+                return salaries[(salaries.Count/2)+1].ToString();
+            }
+            else
+            {
+                return ((salaries[(salaries.Count / 2) + 1] + salaries[(salaries.Count / 2)])/2).ToString();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка расчёта средней зарплаты: {ex.Message}");
+            return "Ошибка расчёта";
+        }
+    }
+
+    public async Task<GetSalaryResponse> GetAnySalaries()
     {
         try
         {
             var response = await _httpClient.GetAnyVacancies(true);
             if (!response.IsSuccess)
             {
-                Console.WriteLine("Не удалось рассчитать среднюю зарплату");
-                return new GetArrangeResponse(false);
+                MessageBox.Show("Не удалось рассчитать среднюю зарплату");
+                return new GetSalaryResponse(false);
             }
-
-            var salary = GetSalaries(response.Vacancies);
-            return new GetArrangeResponse(true, salary.Sum()/(float)salary.Count);
+            var salaries = GetSalaries(response.Vacancies);
+            List<string> salariesList = new List<string>();
+            salariesList.Add($"Максимальная зарплата: {MaxSalary(salaries)} руб/месяц");
+            salariesList.Add($"Минимальная зарплата: {MinSalary(salaries)} руб/месяц");
+            salariesList.Add($"Средняя зарплата: {ArrangeSalary(salaries)} руб/месяц");
+            salariesList.Add($"Медианная зарплата: {MedianSalary(salaries)} руб/месяц");
+            return new GetSalaryResponse(true, salariesList);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
-            Console.WriteLine($"Ошибка расчёта средней зарплаты: {ex.Message}");
-            return new GetArrangeResponse(false);
+            MessageBox.Show($"Ошибка расчёта зарплат: {ex.Message}");
+            return new GetSalaryResponse(false);
         }
     }
 }

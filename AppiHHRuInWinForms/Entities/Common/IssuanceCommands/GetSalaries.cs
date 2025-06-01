@@ -1,31 +1,30 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP;
-using AppiHHRuInWinForms.Entities.Common.Responses;
+﻿using AppiHHRuInWinForms.Entities.Common.Responses;
+using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {
-    internal class GetEmployers : IssuanceCommands
+    public class GetSalaries : IssuanceCommands
     {
-        public GetEmployers(ExtraditionManager extraditionManager)
+        public GetSalaries(ExtraditionManager extraditionManager)
         {
             this.extraditionManager = extraditionManager;
         }
         public override string Description()
         {
-            return "По работадателю";
+            return "По зарплате";
         }
 
         public override async Task<List<string>> Execute()
         {
-            var result = await ((EmployerManager)extraditionManager).GetAnyEmployers();
+            var result = await ((SalaryManager)extraditionManager).GetAnySalaries();
             if (result.IsSuccess)
             {
-                return result.EmployerResponse;
+                return result.Salaries;
             }
             return null;
         }

@@ -25,9 +25,7 @@ namespace AppiHHRuInWinForms
         private void FillComboBox()
         {
             VacantionFilterComboBox.Items.Clear();
-            VacantionFilterComboBox.Items.Add(new GetMinSalary(salaryManager));
-            VacantionFilterComboBox.Items.Add(new GetArrangeSalary(salaryManager));
-            VacantionFilterComboBox.Items.Add(new GetMaxSalary(salaryManager));
+            VacantionFilterComboBox.Items.Add(new GetSalaries(salaryManager));
             VacantionFilterComboBox.Items.Add(new GetFiveOnTwoSchedule(workScheduleManager));
             VacantionFilterComboBox.Items.Add(new GetTwoOnTwoSchedule(workScheduleManager));
             VacantionFilterComboBox.Items.Add(new GetSixOnOneSchedule(workScheduleManager));
