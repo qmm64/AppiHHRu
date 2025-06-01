@@ -26,10 +26,7 @@ namespace AppiHHRuInWinForms
         {
             VacantionFilterComboBox.Items.Clear();
             VacantionFilterComboBox.Items.Add(new GetSalaries(salaryManager));
-            VacantionFilterComboBox.Items.Add(new GetFiveOnTwoSchedule(workScheduleManager));
-            VacantionFilterComboBox.Items.Add(new GetTwoOnTwoSchedule(workScheduleManager));
-            VacantionFilterComboBox.Items.Add(new GetSixOnOneSchedule(workScheduleManager));
-            VacantionFilterComboBox.Items.Add(new GetFourOnThreeSchedule(workScheduleManager));
+            VacantionFilterComboBox.Items.Add(new GetWorkDaySchedules(workScheduleManager));
             VacantionFilterComboBox.Items.Add(new GetAreas(areaManager));
             VacantionFilterComboBox.Items.Add(new GetEmployers(employerManager));
         }
