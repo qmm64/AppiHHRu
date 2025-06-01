@@ -31,7 +31,7 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP
             return employers;
         }
 
-        public async Task<GetEmployerResponse> GetAnyAreas()
+        public async Task<GetEmployerResponse> GetAnyEmployers()
         {
             var responce = await _httpClient.GetAnyVacancies();
             if (!responce.IsSuccess)
