@@ -32,11 +32,20 @@
             VacantionFilterComboBox = new ComboBox();
             label1 = new Label();
             panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
+            TypeOfAnaliticLabel = new Label();
+            ParamOfFindComboBox = new ComboBox();
+            label4 = new Label();
+            HardFindCheckBox = new CheckBox();
             CountOfPagesNumericUpDown = new NumericUpDown();
             label3 = new Label();
             OkButton = new Button();
             label2 = new Label();
+            comboBox1 = new ComboBox();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -51,7 +60,7 @@
             // VacantionFilterComboBox
             // 
             VacantionFilterComboBox.FormattingEnabled = true;
-            VacantionFilterComboBox.Location = new Point(19, 161);
+            VacantionFilterComboBox.Location = new Point(5, 59);
             VacantionFilterComboBox.Name = "VacantionFilterComboBox";
             VacantionFilterComboBox.Size = new Size(627, 45);
             VacantionFilterComboBox.TabIndex = 1;
@@ -67,16 +76,75 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(panel2);
+            panel1.Controls.Add(HardFindCheckBox);
             panel1.Controls.Add(CountOfPagesNumericUpDown);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(OkButton);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(VacantionFilterComboBox);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(781, 950);
             panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(ParamOfFindComboBox);
+            panel2.Controls.Add(label4);
+            panel2.Location = new Point(0, 180);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(781, 217);
+            panel2.TabIndex = 8;
+            panel2.Visible = false;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(TypeOfAnaliticLabel);
+            panel3.Controls.Add(VacantionFilterComboBox);
+            panel3.Location = new Point(3, 403);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(778, 113);
+            panel3.TabIndex = 9;
+            // 
+            // TypeOfAnaliticLabel
+            // 
+            TypeOfAnaliticLabel.AutoSize = true;
+            TypeOfAnaliticLabel.Location = new Point(16, 11);
+            TypeOfAnaliticLabel.Name = "TypeOfAnaliticLabel";
+            TypeOfAnaliticLabel.Size = new Size(200, 37);
+            TypeOfAnaliticLabel.TabIndex = 2;
+            TypeOfAnaliticLabel.Text = "Тип аналитики";
+            // 
+            // ParamOfFindComboBox
+            // 
+            ParamOfFindComboBox.FormattingEnabled = true;
+            ParamOfFindComboBox.Location = new Point(19, 58);
+            ParamOfFindComboBox.Name = "ParamOfFindComboBox";
+            ParamOfFindComboBox.Size = new Size(272, 45);
+            ParamOfFindComboBox.TabIndex = 8;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(18, 18);
+            label4.Name = "label4";
+            label4.Size = new Size(234, 37);
+            label4.TabIndex = 7;
+            label4.Text = "Параметр поиска";
+            // 
+            // HardFindCheckBox
+            // 
+            HardFindCheckBox.AutoSize = true;
+            HardFindCheckBox.Location = new Point(19, 118);
+            HardFindCheckBox.Name = "HardFindCheckBox";
+            HardFindCheckBox.Size = new Size(247, 41);
+            HardFindCheckBox.TabIndex = 6;
+            HardFindCheckBox.Text = "Сложный поиск";
+            HardFindCheckBox.UseVisualStyleBackColor = true;
+            HardFindCheckBox.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // CountOfPagesNumericUpDown
             // 
@@ -91,11 +159,12 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(30, 9);
+            label3.Location = new Point(19, 9);
             label3.Name = "label3";
             label3.Size = new Size(456, 37);
             label3.TabIndex = 4;
             label3.Text = "Количество страниц для аналитики";
+            label3.Click += label3_Click;
             // 
             // OkButton
             // 
@@ -110,11 +179,19 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(30, 113);
+            label2.Location = new Point(18, 116);
             label2.Name = "label2";
-            label2.Size = new Size(200, 37);
-            label2.TabIndex = 2;
-            label2.Text = "Тип аналитики";
+            label2.Size = new Size(140, 37);
+            label2.TabIndex = 9;
+            label2.Text = "Параметр";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(18, 156);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(272, 45);
+            comboBox1.TabIndex = 10;
             // 
             // Form1
             // 
@@ -128,6 +205,10 @@
             Text = "Form1";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -140,8 +221,15 @@
         private Label label1;
         private Panel panel1;
         private Button OkButton;
-        private Label label2;
+        private Label TypeOfAnaliticLabel;
         private NumericUpDown CountOfPagesNumericUpDown;
         private Label label3;
+        private CheckBox HardFindCheckBox;
+        private Label label4;
+        private Panel panel2;
+        private Panel panel3;
+        private ComboBox ParamOfFindComboBox;
+        private Label label2;
+        private ComboBox comboBox1;
     }
 }

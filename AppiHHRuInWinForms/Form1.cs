@@ -20,6 +20,7 @@ namespace AppiHHRuInWinForms
             InitializeComponent();
             CreateManagers();
             FillComboBox();
+            HardFindStateChange(HardFindCheckBox.Checked);
         }
 
         private void FillComboBox()
@@ -81,9 +82,32 @@ namespace AppiHHRuInWinForms
             }
         }
 
+        private void HardFindStateChange(bool state)
+        {
+            panel2.Visible = state;
+            if (state)
+            {
+                panel3.Location = new Point(3, 403);
+            }
+            else
+            {
+                panel3.Location = new Point(0, 180);
+            }
+        }
+
         private void CountOfPagesNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            HardFindStateChange(HardFindCheckBox.Checked);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
