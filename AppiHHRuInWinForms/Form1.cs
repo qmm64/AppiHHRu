@@ -3,6 +3,7 @@ using AppiHHRuInWinForms.Entities.Common.IssuanceCommands;
 using AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
+using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 using System.Threading.Tasks;
 
@@ -53,7 +54,11 @@ namespace AppiHHRuInWinForms
             {
                 if (HardFindCheckBox.Checked && ParamOfFindComboBox.SelectedIndex != -1 && ParamComboBox.SelectedIndex != -1)
                 {
-
+                    httpClient.ModifyURL(((ICommandsWithHardFind)ParamOfFindComboBox.SelectedItem).ModificationOfURL((VacancyResponse)ParamComboBox.SelectedItem));
+                }
+                else
+                {
+                    httpClient.ModifyURL();
                 }
                 CheckCountOfPage();
                 OutputListBox.Items.Clear();
@@ -81,24 +86,20 @@ namespace AppiHHRuInWinForms
             }
         }
 
-        private void ShowResult()
+        private async Task ShowResult()
         {
-            int t = VacantionFilterComboBox.SelectedIndex;
-            Task.Run(async () =>
+            var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[VacantionFilterComboBox.SelectedIndex]).Execute();
+            BeginInvoke(new Action(() =>
             {
-                var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute();
-                BeginInvoke(new Action(() =>
+                if (result == null)
                 {
-                    if (result == null)
-                    {
-                        MessageBox.Show("Превышено время ожидания сервера");
-                    }
-                    else
-                    {
-                        OutputListBox.Items.AddRange(result.ToArray());
-                    }
-                }));
-            });
+                    MessageBox.Show("Превышено время ожидания сервера");
+                }
+                else
+                {
+                    OutputListBox.Items.AddRange(result.ToArray());
+                }
+            }));
         }
 
         private void HardFindStateChange(bool state)

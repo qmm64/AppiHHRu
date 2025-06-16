@@ -7,51 +7,45 @@ using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse
 {
-    public class Vacancy
+    public class Vacancy : VacancyResponse
     {
-        [JsonPropertyName("id")]
-        public string VacancyId { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
         [JsonPropertyName("department")]
-        public Department Department { get; set; }
+        public VacancyResponse Department { get; set; }
 
         [JsonPropertyName("area")]
-        public Area Area { get; set; }
+        public VacancyResponse Area { get; set; }
 
         [JsonPropertyName("salary_range")]
         public SalaryRange SalaryRange { get; set; }
 
         [JsonPropertyName("type")]
-        public VacancyType VacancyType { get; set; }
+        public VacancyResponse VacancyType { get; set; }
 
         [JsonPropertyName("published_at")]
         public string PublishedAt { get; set; }
 
         [JsonPropertyName("employer")]
-        public Employer Employer { get; set; }
+        public VacancyResponse Employer { get; set; }
 
         [JsonPropertyName("snippet")]
-        public Snippet Snippet { get; set; }
+        public VacancyResponse Snippet { get; set; }
 
         [JsonPropertyName("work_format")]
-        public WorkFormat[] WorkFormat { get; set; }
+        public VacancyResponse[] WorkFormat { get; set; }
 
         [JsonPropertyName("working_hours")]
-        public WorkingHours[] WorkingHours { get; set; }
+        public VacancyResponse[] WorkingHours { get; set; }
 
         [JsonPropertyName("work_schedule_by_days")]
-        public WorkScheduleByDays[] WorkingHoursByDays { get; set; }
+        public VacancyResponse[] WorkingHoursByDays { get; set; }
 
         [JsonPropertyName("professional_roles")]
-        public ProfessionalRoles[] ProfessionalRoles { get; set; }
+        public VacancyResponse[] ProfessionalRoles { get; set; }
 
         [JsonPropertyName("experience")]
-        public Experience Experience { get; set; }
+        public VacancyResponse Experience { get; set; }
 
         [JsonPropertyName("employment")]
-        public Employment Employment { get; set; }
+        public VacancyResponse Employment { get; set; }
     }
 }

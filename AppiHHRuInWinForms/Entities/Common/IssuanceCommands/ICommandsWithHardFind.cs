@@ -12,5 +12,6 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
     {
         public List<VacancyResponse> GetParametrs(GetAnyVacanciesResponse getAnyVacanciesResponse);
         public string AppendToURL();
+        public string ModificationOfURL(VacancyResponse vacancyResponse);
     }
 }

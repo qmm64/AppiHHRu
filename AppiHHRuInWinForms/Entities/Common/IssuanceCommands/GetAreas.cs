@@ -49,5 +49,10 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             }
             return uniqueAreas.Values.ToList();
         }
+
+        public string ModificationOfURL(VacancyResponse vacancyResponse)
+        {
+            return $"area={vacancyResponse.Id}";
+        }
     }
 }

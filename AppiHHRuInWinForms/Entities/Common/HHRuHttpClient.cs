@@ -13,6 +13,7 @@ public class HHRuHttpClient
 {
 
     private const string HHAppiUrl = "https://api.hh.ru/vacancies?";
+    private string ModificationOfURL = "";
     private HttpClient HHHttpClient;
     private int countOfPages = 1;
 
@@ -29,7 +30,7 @@ public class HHRuHttpClient
             var vacancies = new List<Vacancy>();
             for (int i = 0; i < countOfPages; i++)
             {
-                var result = await HHHttpClient.GetAsync(HHAppiUrl + $"page={i}&only_with_salary={dependsOnSalary}");
+                var result = await HHHttpClient.GetAsync(HHAppiUrl + $"page={i}&only_with_salary={dependsOnSalary}" + ModificationOfURL);
                 var responce = await result.Content.ReadAsStringAsync();
                 vacancies.AddRange(JsonSerializer.Deserialize<VacanciesResponse>(responce).Vacancies);
                 if (vacancies == null)
@@ -56,5 +57,15 @@ public class HHRuHttpClient
     public int GetCountOfPages()
     {
         return countOfPages;
+    }
+
+    public void ModifyURL()
+    {
+        ModificationOfURL = "&area=113";
+    }
+
+    public void ModifyURL(string modification)
+    {
+        ModificationOfURL = $"&{modification}";
     }
 }

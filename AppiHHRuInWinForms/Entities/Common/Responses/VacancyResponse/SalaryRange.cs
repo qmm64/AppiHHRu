@@ -19,6 +19,6 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse
         public string Currency { get; set; }
 
         [JsonPropertyName("mode")]
-        public SalaryRangeMode Mode { get; set; }
+        public VacancyResponse Mode { get; set; }
     }
 }
