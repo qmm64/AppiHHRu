@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse
 {
-    public class Snippet
+    public class Snippet : VacancyResponse
     {
         [JsonPropertyName("requirement")]
         public string Requirement { get; set; }

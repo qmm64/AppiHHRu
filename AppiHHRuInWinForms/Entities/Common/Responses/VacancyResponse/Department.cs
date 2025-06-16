@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse
 {
-    public class Department
+    public class Department : VacancyResponse
     {
         [JsonPropertyName("id")]
-        public string DepartmentId { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }

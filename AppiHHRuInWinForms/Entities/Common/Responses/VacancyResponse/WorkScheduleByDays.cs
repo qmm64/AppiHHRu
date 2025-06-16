@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse
 {
-    public class WorkScheduleByDays
+    public class WorkScheduleByDays : VacancyResponse
     {
         [JsonPropertyName("id")]
-        public string WorkScheduleByDaysId { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

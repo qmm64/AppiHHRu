@@ -15,6 +15,7 @@ namespace AppiHHRuInWinForms
         private AreaManager areaManager;
         private EmployerManager employerManager;
         private int countOfPages;
+        private HHRuHttpClient httpClient;
         public Form1()
         {
             InitializeComponent();
@@ -30,13 +31,16 @@ namespace AppiHHRuInWinForms
             VacantionFilterComboBox.Items.Add(new GetWorkDaySchedules(workScheduleManager));
             VacantionFilterComboBox.Items.Add(new GetAreas(areaManager));
             VacantionFilterComboBox.Items.Add(new GetEmployers(employerManager));
+            ParamOfFindComboBox.Items.Clear();
+            ParamOfFindComboBox.Items.Add(new GetWorkDaySchedules(workScheduleManager));
+            ParamOfFindComboBox.Items.Add(new GetAreas(areaManager));
         }
 
         private void CreateManagers()
         {
-            var httpClient = new HHRuHttpClient();
-            httpClient.SetCountOfPages((int)CountOfPagesNumericUpDown.Value);
-            countOfPages = httpClient.GetCountOfPages();
+            httpClient = new HHRuHttpClient();
+            countOfPages = (int)CountOfPagesNumericUpDown.Value;
+            httpClient.SetCountOfPages(countOfPages);
             salaryManager = new(httpClient);
             workScheduleManager = new(httpClient);
             areaManager = new(httpClient);
@@ -47,6 +51,10 @@ namespace AppiHHRuInWinForms
         {
             if (VacantionFilterComboBox.SelectedIndex != -1)
             {
+                if (HardFindCheckBox.Checked && ParamOfFindComboBox.SelectedIndex != -1 && ParamComboBox.SelectedIndex!=-1) 
+                {
+
+                }
                 int selectedIndex = VacantionFilterComboBox.SelectedIndex;
                 if (CountOfPagesNumericUpDown.Value != countOfPages)
                 {
@@ -57,23 +65,7 @@ namespace AppiHHRuInWinForms
                 OutputListBox.Items.Clear();
                 try
                 {
-                    int t = VacantionFilterComboBox.SelectedIndex;
-                    Task.Run(async () =>
-                    {
-                        var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute();
-                        BeginInvoke(new Action(() =>
-                        {
-                            if (result == null)
-                            {
-                                MessageBox.Show("Превышено время ожидания сервера");
-                            }
-                            else
-                            {
-                                OutputListBox.Items.AddRange(result.ToArray());
-                            }
-                        }));
-                    });
-
+                    ShowResult();
                 }
                 catch (Exception ex)
                 {
@@ -82,22 +74,37 @@ namespace AppiHHRuInWinForms
             }
         }
 
+        private void ShowResult()
+        {
+            int t = VacantionFilterComboBox.SelectedIndex;
+            Task.Run(async () =>
+            {
+                var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[t]).Execute();
+                BeginInvoke(new Action(() =>
+                {
+                    if (result == null)
+                    {
+                        MessageBox.Show("Превышено время ожидания сервера");
+                    }
+                    else
+                    {
+                        OutputListBox.Items.AddRange(result.ToArray());
+                    }
+                }));
+            });
+        }
+
         private void HardFindStateChange(bool state)
         {
             panel2.Visible = state;
             if (state)
             {
-                panel3.Location = new Point(3, 403);
+                panel3.Location = new Point(0, panel2.Location.Y+panel2.Height);
             }
             else
             {
-                panel3.Location = new Point(0, 180);
+                panel3.Location = panel2.Location;
             }
-        }
-
-        private void CountOfPagesNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -105,9 +112,17 @@ namespace AppiHHRuInWinForms
             HardFindStateChange(HardFindCheckBox.Checked);
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
 
+        private async Task j()
+        {
+            var vacanciesResponce = await httpClient.GetAnyVacancies();
+            var t = ((ICommandsWithHardFind)ParamOfFindComboBox.SelectedItem).GetParametrs(vacanciesResponce);
+            ParamComboBox.Items.Clear();    
+            ParamComboBox.Items.AddRange(t.ToArray());
+        }
+        private void ParamOfFindComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            j();
         }
     }
 }

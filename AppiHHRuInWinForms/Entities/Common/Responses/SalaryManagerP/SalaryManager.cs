@@ -20,7 +20,7 @@ public class SalaryManager:ExtraditionManager
 
         foreach (var vacancy in Vacancies)
         {
-            if (vacancy?.SalaryRange?.Mode?.SalaryRangeModeId == "MONTH")
+            if (vacancy?.SalaryRange?.Mode?.Id == "MONTH")
             {
                 if (vacancy.SalaryRange.From.HasValue)
                 {

@@ -12,7 +12,7 @@ namespace AppiHHRuInWinForms.Entities.Common;
 public class HHRuHttpClient
 {
 
-    private const string HHAppiUrl = "https://api.hh.ru/";
+    private const string HHAppiUrl = "https://api.hh.ru/vacancies?";
     private HttpClient HHHttpClient;
     private int countOfPages = 1;
 
@@ -29,7 +29,7 @@ public class HHRuHttpClient
             var vacancies = new List<Vacancy>();
             for (int i = 0; i < countOfPages; i++)
             {
-                var result = await HHHttpClient.GetAsync(HHAppiUrl + $"vacancies?area=113&page={i}&only_with_salary={dependsOnSalary}");
+                var result = await HHHttpClient.GetAsync(HHAppiUrl + $"page={i}&only_with_salary={dependsOnSalary}");
                 var responce = await result.Content.ReadAsStringAsync();
                 vacancies.AddRange(JsonSerializer.Deserialize<VacanciesResponse>(responce).Vacancies);
                 if (vacancies == null)

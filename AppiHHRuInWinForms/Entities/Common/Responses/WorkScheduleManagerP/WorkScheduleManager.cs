@@ -33,7 +33,7 @@ internal class WorkScheduleManager : ExtraditionManager
         List<string> daySchedules = new();
         foreach(var format in WorkScheduleFormats.Keys)
         {
-            var countAllDaySchefule = responce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.WorkScheduleByDaysId == format));
+            var countAllDaySchefule = responce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.Id == format));
             double allDayPercent = (double)countAllDaySchefule / (double)responce.Vacancies.Count * 100;
             daySchedules.Add($"График {WorkScheduleFormats[format]} - {countAllDaySchefule} вакансий, процент от общего числа: {allDayPercent}");
         }
