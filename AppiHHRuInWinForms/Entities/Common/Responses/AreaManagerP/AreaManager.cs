@@ -44,7 +44,8 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
             List<string> areaResponse = new();
             foreach (var key in areas.Keys)
             {
-                areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {(float)areas[key] / (float)responce.Vacancies.Count * 100}%");
+                var procent = Math.Round((float)areas[key] / (float)responce.Vacancies.Count * 100,2);
+                areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {procent}%");
             }
             return new GetAreaResponse(true, areaResponse);
         }

@@ -43,7 +43,7 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             {
                 foreach (var format in vacancy.WorkingHoursByDays)
                 {
-                    if (!uniqueWorkDaySchedules.ContainsKey(format.Id) && format.Name.Length==3)
+                    if (!uniqueWorkDaySchedules.ContainsKey(format.Id)/* && format.Name.Length==3*/)
                     {
                         uniqueWorkDaySchedules[format.Id] = format;
                     }
@@ -54,7 +54,7 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 
         public string ModificationOfURL(VacancyResponse vacancyResponse)
         {
-            return $"work_schedule_by_days={vacancyResponse.Id}";
+            return $"work_schedule_by_days={vacancyResponse.Id}&area=113";
         }
     }
 }

@@ -13,7 +13,7 @@ public class HHRuHttpClient
 {
 
     private const string HHAppiUrl = "https://api.hh.ru/vacancies?";
-    private string ModificationOfURL = "";
+    private string ModificationOfURL = "&area=113";
     private HttpClient HHHttpClient;
     private int countOfPages = 1;
 

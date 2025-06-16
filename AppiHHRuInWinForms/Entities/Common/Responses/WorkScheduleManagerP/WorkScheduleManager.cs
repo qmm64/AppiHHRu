@@ -15,11 +15,14 @@ internal class WorkScheduleManager : ExtraditionManager
     }
 
     private Dictionary<string, string> WorkScheduleFormats = new Dictionary<string, string>{
-        { "FIVE_ON_TWO_OFF","5 через 2"},
-        { "TWO_ON_TWO_OFF","2 через 2"},
-        { "SIX_ON_ONE_OFF","6 через 1"},
-        { "FOUR_ON_THREE_OFF","4 через 3"},
-        { "THREE_ON_TWO_OFF","3 через 2"},
+        { "FIVE_ON_TWO_OFF","5/2"},
+        { "TWO_ON_TWO_OFF","2/2"},
+        { "SIX_ON_ONE_OFF","6/1"},
+        { "FOUR_ON_THREE_OFF","4/3"},
+        { "THREE_ON_TWO_OFF","3/2"},
+        { "WEEKEND","По выходным"},
+        { "FLEXIBLE","Гибкий" },
+        { "OTHER","Другое" }
     };
 
     public async Task<GetAllDaySchedulePercentResponce> GetAllDaySchedulePercent()
@@ -34,7 +37,7 @@ internal class WorkScheduleManager : ExtraditionManager
         foreach(var format in WorkScheduleFormats.Keys)
         {
             var countAllDaySchefule = responce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.Id == format));
-            double allDayPercent = (double)countAllDaySchefule / (double)responce.Vacancies.Count * 100;
+            double allDayPercent = Math.Round((double)countAllDaySchefule / (double)responce.Vacancies.Count * 100,2);
             daySchedules.Add($"График {WorkScheduleFormats[format]} - {countAllDaySchefule} вакансий, процент от общего числа: {allDayPercent}");
         }
         return new GetAllDaySchedulePercentResponce(true, daySchedules);

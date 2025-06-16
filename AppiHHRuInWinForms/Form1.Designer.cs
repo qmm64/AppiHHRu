@@ -43,34 +43,36 @@
             CountOfPagesNumericUpDown = new NumericUpDown();
             label3 = new Label();
             OkButton = new Button();
+            panel4 = new Panel();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).BeginInit();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // OutputListBox
             // 
             OutputListBox.FormattingEnabled = true;
-            OutputListBox.Location = new Point(418, 55);
+            OutputListBox.Location = new Point(1, 31);
             OutputListBox.Margin = new Padding(1);
             OutputListBox.Name = "OutputListBox";
-            OutputListBox.Size = new Size(436, 304);
+            OutputListBox.Size = new Size(596, 349);
             OutputListBox.TabIndex = 0;
             // 
             // VacantionFilterComboBox
             // 
             VacantionFilterComboBox.FormattingEnabled = true;
-            VacantionFilterComboBox.Location = new Point(2, 24);
+            VacantionFilterComboBox.Location = new Point(9, 24);
             VacantionFilterComboBox.Margin = new Padding(1);
             VacantionFilterComboBox.Name = "VacantionFilterComboBox";
-            VacantionFilterComboBox.Size = new Size(295, 23);
+            VacantionFilterComboBox.Size = new Size(247, 23);
             VacantionFilterComboBox.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(418, 32);
+            label1.Location = new Point(1, 4);
             label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
             label1.Size = new Size(50, 15);
@@ -79,33 +81,33 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(HardFindCheckBox);
             panel1.Controls.Add(CountOfPagesNumericUpDown);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(OkButton);
-            panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(364, 385);
+            panel1.Size = new Size(265, 385);
             panel1.TabIndex = 3;
             // 
             // panel3
             // 
             panel3.Controls.Add(TypeOfAnaliticLabel);
             panel3.Controls.Add(VacantionFilterComboBox);
-            panel3.Location = new Point(0, 163);
+            panel3.Location = new Point(1, 161);
             panel3.Margin = new Padding(1);
             panel3.Name = "panel3";
-            panel3.Size = new Size(363, 46);
+            panel3.Size = new Size(268, 54);
             panel3.TabIndex = 9;
             // 
             // TypeOfAnaliticLabel
             // 
             TypeOfAnaliticLabel.AutoSize = true;
-            TypeOfAnaliticLabel.Location = new Point(7, 4);
+            TypeOfAnaliticLabel.Location = new Point(8, 7);
             TypeOfAnaliticLabel.Margin = new Padding(1, 0, 1, 0);
             TypeOfAnaliticLabel.Name = "TypeOfAnaliticLabel";
             TypeOfAnaliticLabel.Size = new Size(89, 15);
@@ -121,7 +123,7 @@
             panel2.Location = new Point(0, 73);
             panel2.Margin = new Padding(1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(364, 88);
+            panel2.Size = new Size(268, 88);
             panel2.TabIndex = 8;
             panel2.Visible = false;
             // 
@@ -131,7 +133,7 @@
             ParamComboBox.Location = new Point(8, 63);
             ParamComboBox.Margin = new Padding(1);
             ParamComboBox.Name = "ParamComboBox";
-            ParamComboBox.Size = new Size(129, 23);
+            ParamComboBox.Size = new Size(247, 23);
             ParamComboBox.TabIndex = 10;
             // 
             // label2
@@ -150,7 +152,7 @@
             ParamOfFindComboBox.Location = new Point(9, 24);
             ParamOfFindComboBox.Margin = new Padding(1);
             ParamOfFindComboBox.Name = "ParamOfFindComboBox";
-            ParamOfFindComboBox.Size = new Size(129, 23);
+            ParamOfFindComboBox.Size = new Size(247, 23);
             ParamOfFindComboBox.TabIndex = 8;
             ParamOfFindComboBox.SelectedIndexChanged += ParamOfFindComboBox_SelectedIndexChanged;
             // 
@@ -202,20 +204,29 @@
             OkButton.Location = new Point(6, 356);
             OkButton.Margin = new Padding(1);
             OkButton.Name = "OkButton";
-            OkButton.Size = new Size(348, 24);
+            OkButton.Size = new Size(249, 24);
             OkButton.TabIndex = 3;
             OkButton.Text = "Выполнить аналитику";
             OkButton.UseVisualStyleBackColor = true;
             OkButton.Click += OkButton_Click;
+            // 
+            // panel4
+            // 
+            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            panel4.Controls.Add(OutputListBox);
+            panel4.Controls.Add(label1);
+            panel4.Location = new Point(269, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(603, 385);
+            panel4.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(872, 385);
+            Controls.Add(panel4);
             Controls.Add(panel1);
-            Controls.Add(label1);
-            Controls.Add(OutputListBox);
             Margin = new Padding(1);
             Name = "Form1";
             Text = "Form1";
@@ -226,8 +237,9 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -247,5 +259,6 @@
         private ComboBox ParamOfFindComboBox;
         private Label label2;
         private ComboBox ParamComboBox;
+        private Panel panel4;
     }
 }
