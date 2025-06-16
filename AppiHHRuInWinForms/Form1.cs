@@ -51,17 +51,11 @@ namespace AppiHHRuInWinForms
         {
             if (VacantionFilterComboBox.SelectedIndex != -1)
             {
-                if (HardFindCheckBox.Checked && ParamOfFindComboBox.SelectedIndex != -1 && ParamComboBox.SelectedIndex!=-1) 
+                if (HardFindCheckBox.Checked && ParamOfFindComboBox.SelectedIndex != -1 && ParamComboBox.SelectedIndex != -1)
                 {
 
                 }
-                int selectedIndex = VacantionFilterComboBox.SelectedIndex;
-                if (CountOfPagesNumericUpDown.Value != countOfPages)
-                {
-                    CreateManagers();
-                    FillComboBox();
-                    VacantionFilterComboBox.SelectedIndex = selectedIndex;
-                }
+                CheckCountOfPage();
                 OutputListBox.Items.Clear();
                 try
                 {
@@ -71,6 +65,19 @@ namespace AppiHHRuInWinForms
                 {
                     OutputListBox.Items.Add($"Ошибка вывода. Текст: {ex.Message}");
                 }
+            }
+        }
+
+        private void CheckCountOfPage()
+        {
+            if (CountOfPagesNumericUpDown.Value != countOfPages)
+            {
+                int selectedMainIndex = VacantionFilterComboBox.SelectedIndex;
+                int selectedSecondIndex = ParamOfFindComboBox.SelectedIndex;
+                CreateManagers();
+                FillComboBox();
+                VacantionFilterComboBox.SelectedIndex = selectedMainIndex;
+                ParamOfFindComboBox.SelectedIndex = selectedSecondIndex;
             }
         }
 
@@ -99,7 +106,7 @@ namespace AppiHHRuInWinForms
             panel2.Visible = state;
             if (state)
             {
-                panel3.Location = new Point(0, panel2.Location.Y+panel2.Height);
+                panel3.Location = new Point(0, panel2.Location.Y + panel2.Height);
             }
             else
             {
@@ -112,17 +119,26 @@ namespace AppiHHRuInWinForms
             HardFindStateChange(HardFindCheckBox.Checked);
         }
 
-
-        private async Task j()
+        private async Task FirstParameterStateChange()
         {
             var vacanciesResponce = await httpClient.GetAnyVacancies();
             var t = ((ICommandsWithHardFind)ParamOfFindComboBox.SelectedItem).GetParametrs(vacanciesResponce);
-            ParamComboBox.Items.Clear();    
+            ParamComboBox.Items.Clear();
             ParamComboBox.Items.AddRange(t.ToArray());
         }
+
         private void ParamOfFindComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            j();
+            FirstParameterStateChange();
+        }
+
+        private void CountOfPagesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (HardFindCheckBox.Checked)
+            {
+                CheckCountOfPage();
+                FirstParameterStateChange();
+            }
         }
     }
 }

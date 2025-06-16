@@ -185,6 +185,7 @@
             CountOfPagesNumericUpDown.Size = new Size(48, 23);
             CountOfPagesNumericUpDown.TabIndex = 5;
             CountOfPagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            CountOfPagesNumericUpDown.ValueChanged += CountOfPagesNumericUpDown_ValueChanged;
             // 
             // label3
             // 
