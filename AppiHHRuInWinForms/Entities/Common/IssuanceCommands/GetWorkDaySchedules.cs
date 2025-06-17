@@ -36,20 +36,28 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return null;
         }
 
-        public List<VacancyResponse> GetParametrs(GetAnyVacanciesResponse getAnyVacanciesResponse)
+        public GetParametersResponse GetParameters(GetAnyVacanciesResponse getAnyVacanciesResponse)
         {
-            Dictionary<string, VacancyResponse> uniqueWorkDaySchedules = new();
-            foreach (var vacancy in getAnyVacanciesResponse.Vacancies)
+            try
             {
-                foreach (var format in vacancy.WorkingHoursByDays)
+                Dictionary<string, VacancyResponse> uniqueWorkDaySchedules = new();
+                foreach (var vacancy in getAnyVacanciesResponse.Vacancies)
                 {
-                    if (!uniqueWorkDaySchedules.ContainsKey(format.Id)/* && format.Name.Length==3*/)
+                    foreach (var format in vacancy.WorkingHoursByDays)
                     {
-                        uniqueWorkDaySchedules[format.Id] = format;
+                        if (!uniqueWorkDaySchedules.ContainsKey(format.Id)/* && format.Name.Length==3*/)
+                        {
+                            uniqueWorkDaySchedules[format.Id] = format;
+                        }
                     }
                 }
+                return new GetParametersResponse(true, uniqueWorkDaySchedules.Values.ToList());
             }
-            return uniqueWorkDaySchedules.Values.ToList();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка получения параметров. Текст: {ex.Message}");
+                return new GetParametersResponse(false);
+            }
         }
 
         public string ModificationOfURL(VacancyResponse vacancyResponse)

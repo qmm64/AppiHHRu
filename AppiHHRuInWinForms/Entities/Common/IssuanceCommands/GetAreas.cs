@@ -37,17 +37,25 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             return null;
         }
 
-        public List<VacancyResponse> GetParametrs(GetAnyVacanciesResponse getAnyVacanciesResponse)
+        public GetParametersResponse GetParameters(GetAnyVacanciesResponse getAnyVacanciesResponse)
         {
-            Dictionary<string, VacancyResponse> uniqueAreas = new();
-            foreach (var vacancy in getAnyVacanciesResponse.Vacancies)
+            try
             {
-                if (!uniqueAreas.ContainsKey(vacancy.Area.Id))
+                Dictionary<string, VacancyResponse> uniqueAreas = new();
+                foreach (var vacancy in getAnyVacanciesResponse.Vacancies)
                 {
-                    uniqueAreas[vacancy.Area.Id] = vacancy.Area;
+                    if (!uniqueAreas.ContainsKey(vacancy.Area.Id))
+                    {
+                        uniqueAreas[vacancy.Area.Id] = vacancy.Area;
+                    }
                 }
+                return new GetParametersResponse(true, uniqueAreas.Values.ToList());
             }
-            return uniqueAreas.Values.ToList();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка получения параметров. Текст: {ex.Message}");
+                return new GetParametersResponse(false);
+            }
         }
 
         public string ModificationOfURL(VacancyResponse vacancyResponse)

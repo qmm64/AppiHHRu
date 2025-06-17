@@ -10,7 +10,7 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {
     public interface ICommandsWithHardFind 
     {
-        public List<VacancyResponse> GetParametrs(GetAnyVacanciesResponse getAnyVacanciesResponse);
+        public GetParametersResponse GetParameters(GetAnyVacanciesResponse getAnyVacanciesResponse);
         public string AppendToURL();
         public string ModificationOfURL(VacancyResponse vacancyResponse);
     }

@@ -123,9 +123,12 @@ namespace AppiHHRuInWinForms
         private async Task FirstParameterStateChange()
         {
             var vacanciesResponce = await httpClient.GetAnyVacancies();
-            var t = ((ICommandsWithHardFind)ParamOfFindComboBox.SelectedItem).GetParametrs(vacanciesResponce);
+            var parameters = ((ICommandsWithHardFind)ParamOfFindComboBox.SelectedItem).GetParameters(vacanciesResponce);
             ParamComboBox.Items.Clear();
-            ParamComboBox.Items.AddRange(t.ToArray());
+            if (parameters.IsSuccess)
+            {
+                ParamComboBox.Items.AddRange(parameters.ParametersResponse.ToArray());
+            }
         }
 
         private void ParamOfFindComboBox_SelectedIndexChanged(object sender, EventArgs e)
