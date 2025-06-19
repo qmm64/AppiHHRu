@@ -23,30 +23,33 @@ public class HHRuHttpClient
         HHHttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("HHVacFinder");
         HHHttpClient.Timeout = TimeSpan.FromSeconds(10);
     }
-    public async Task<GetAnyVacanciesResponse> GetAnyVacancies(bool dependsOnSalary = false) 
+
+    public async Task<GetAnyVacanciesResponse> GetAnyVacancies(bool dependsOnSalary = false)
     {
         try
         {
-            var vacancies = new List<Vacancy>();
+            var tasks = new List<Task<Vacancy[]>>();
             for (int i = 0; i < countOfPages; i++)
             {
-                var result = await HHHttpClient.GetAsync(HHAppiUrl + $"page={i}&only_with_salary={dependsOnSalary}" + ModificationOfURL);
-                var responce = await result.Content.ReadAsStringAsync();
-                vacancies.AddRange(JsonSerializer.Deserialize<VacanciesResponse>(responce).Vacancies);
-                if (vacancies == null)
-                {
-                    Console.WriteLine("Не удалось распарсить вакансии!");
-                    return new GetAnyVacanciesResponse(false);
-                }
+                tasks.Add(DeserializePage(dependsOnSalary, i));
             }
-            Task.WhenAll();
-            return new GetAnyVacanciesResponse(true,vacancies);
+            var results = await Task.WhenAll(tasks);
+            var vacancies = results.Where(x => x != null).SelectMany(x => x).ToList();
+            return new GetAnyVacanciesResponse(true, vacancies);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Произошла ошибка при выполнении {nameof(GetAnyVacancies)}. Текст исключение: {ex.Message}");
+            MessageBox.Show($"Произошла ошибка при выполнении {nameof(GetAnyVacancies)}. Текст исключение: {ex.Message}");
             return new GetAnyVacanciesResponse(false);
         }
+    }
+
+    private async Task<Vacancy[]> DeserializePage(bool dependsOnSalary, int numberOfPage)
+    {
+        var URL = $"{HHAppiUrl}page={numberOfPage}&only_with_salary={dependsOnSalary}{ModificationOfURL}";
+        var result = await HHHttpClient.GetAsync(URL);
+        var responce = await result.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<VacanciesResponse>(responce).Vacancies;
     }
 
     public void SetCountOfPages(int countOfPages)

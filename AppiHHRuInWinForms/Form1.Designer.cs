@@ -40,14 +40,14 @@
             ParamOfFindComboBox = new ComboBox();
             label4 = new Label();
             HardFindCheckBox = new CheckBox();
-            CountOfPagesNumericUpDown = new NumericUpDown();
+            CountOfVacanciesNumericUpDown = new NumericUpDown();
             label3 = new Label();
             OkButton = new Button();
             panel4 = new Panel();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CountOfVacanciesNumericUpDown).BeginInit();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -85,7 +85,7 @@
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(HardFindCheckBox);
-            panel1.Controls.Add(CountOfPagesNumericUpDown);
+            panel1.Controls.Add(CountOfVacanciesNumericUpDown);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(OkButton);
             panel1.Location = new Point(0, 0);
@@ -180,14 +180,14 @@
             // 
             // CountOfPagesNumericUpDown
             // 
-            CountOfPagesNumericUpDown.Location = new Point(9, 20);
-            CountOfPagesNumericUpDown.Margin = new Padding(1);
-            CountOfPagesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            CountOfPagesNumericUpDown.Name = "CountOfPagesNumericUpDown";
-            CountOfPagesNumericUpDown.Size = new Size(48, 23);
-            CountOfPagesNumericUpDown.TabIndex = 5;
-            CountOfPagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            CountOfPagesNumericUpDown.ValueChanged += CountOfPagesNumericUpDown_ValueChanged;
+            CountOfVacanciesNumericUpDown.Location = new Point(9, 20);
+            CountOfVacanciesNumericUpDown.Margin = new Padding(1);
+            CountOfVacanciesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            CountOfVacanciesNumericUpDown.Name = "CountOfPagesNumericUpDown";
+            CountOfVacanciesNumericUpDown.Size = new Size(48, 23);
+            CountOfVacanciesNumericUpDown.TabIndex = 5;
+            CountOfVacanciesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            CountOfVacanciesNumericUpDown.ValueChanged += CountOfPagesNumericUpDown_ValueChanged;
             // 
             // label3
             // 
@@ -236,7 +236,7 @@
             panel3.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)CountOfPagesNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CountOfVacanciesNumericUpDown).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ResumeLayout(false);
@@ -250,7 +250,7 @@
         private Panel panel1;
         private Button OkButton;
         private Label TypeOfAnaliticLabel;
-        private NumericUpDown CountOfPagesNumericUpDown;
+        private NumericUpDown CountOfVacanciesNumericUpDown;
         private Label label3;
         private CheckBox HardFindCheckBox;
         private Label label4;

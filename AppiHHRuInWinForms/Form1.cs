@@ -40,7 +40,7 @@ namespace AppiHHRuInWinForms
         private void CreateManagers()
         {
             httpClient = new HHRuHttpClient();
-            countOfPages = (int)CountOfPagesNumericUpDown.Value;
+            countOfPages = (int)CountOfVacanciesNumericUpDown.Value;
             httpClient.SetCountOfPages(countOfPages);
             salaryManager = new(httpClient);
             workScheduleManager = new(httpClient);
@@ -60,7 +60,7 @@ namespace AppiHHRuInWinForms
                 {
                     httpClient.ModifyURL();
                 }
-                CheckCountOfPage();
+                CheckCountOfVacancies();
                 OutputListBox.Items.Clear();
                 try
                 {
@@ -73,9 +73,9 @@ namespace AppiHHRuInWinForms
             }
         }
 
-        private void CheckCountOfPage()
+        private void CheckCountOfVacancies()
         {
-            if (CountOfPagesNumericUpDown.Value != countOfPages)
+            if (CountOfVacanciesNumericUpDown.Value != countOfPages)
             {
                 int selectedMainIndex = VacantionFilterComboBox.SelectedIndex;
                 int selectedSecondIndex = ParamOfFindComboBox.SelectedIndex;
@@ -140,7 +140,7 @@ namespace AppiHHRuInWinForms
         {
             if (HardFindCheckBox.Checked)
             {
-                CheckCountOfPage();
+                CheckCountOfVacancies();
                 FirstParameterStateChange();
             }
         }
