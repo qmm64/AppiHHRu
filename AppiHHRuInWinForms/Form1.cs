@@ -5,7 +5,6 @@ using AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
 using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
-using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms
 {
@@ -60,7 +59,7 @@ namespace AppiHHRuInWinForms
                 {
                     httpClient.ModifyURL();
                 }
-                CheckCountOfVacancies();
+                CheckCountOfPages();
                 OutputListBox.Items.Clear();
                 try
                 {
@@ -73,7 +72,7 @@ namespace AppiHHRuInWinForms
             }
         }
 
-        private void CheckCountOfVacancies()
+        private void CheckCountOfPages()
         {
             if (CountOfVacanciesNumericUpDown.Value != countOfPages)
             {
@@ -91,7 +90,7 @@ namespace AppiHHRuInWinForms
             var result = await ((IssuanceCommands)VacantionFilterComboBox.Items[VacantionFilterComboBox.SelectedIndex]).Execute();
             BeginInvoke(new Action(() =>
             {
-                if (result == null)
+                if (result.Count == 0)
                 {
                     MessageBox.Show("Превышено время ожидания сервера");
                 }
@@ -140,7 +139,7 @@ namespace AppiHHRuInWinForms
         {
             if (HardFindCheckBox.Checked)
             {
-                CheckCountOfVacancies();
+                CheckCountOfPages();
                 FirstParameterStateChange();
             }
         }

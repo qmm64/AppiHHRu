@@ -1,10 +1,4 @@
 ﻿using AppiHHRuInWinForms.Entities.Common.Responses;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {

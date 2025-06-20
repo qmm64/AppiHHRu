@@ -1,11 +1,4 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP.WorkScheduleManager;
-
+﻿
 namespace AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 
 internal class WorkScheduleManager : ExtraditionManager

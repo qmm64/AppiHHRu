@@ -1,11 +1,6 @@
 ﻿using AppiHHRuInWinForms.Entities.Common.Responses;
 using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {

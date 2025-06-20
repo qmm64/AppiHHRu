@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
+﻿using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 
 namespace AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
 
