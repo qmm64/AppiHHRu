@@ -1,5 +1,4 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses;
-using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
+﻿using AppiHHRuInWinForms.Entities.Common.Managers;
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {
     public class GetSalaries : IssuanceCommands
@@ -15,10 +14,10 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 
         public override async Task<List<string>> Execute()
         {
-            var result = await ((SalaryManager)extraditionManager).GetAnySalaries();
+            var result = await ((SalaryManager)extraditionManager).GetResponse();
             if (result.IsSuccess)
             {
-                return result.Salaries;
+                return result.Response;
             }
             return null;
         }

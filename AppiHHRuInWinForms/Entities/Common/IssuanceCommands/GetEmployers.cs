@@ -1,5 +1,4 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses;
-using AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP;
+﻿using AppiHHRuInWinForms.Entities.Common.Managers;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {
@@ -17,10 +16,10 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 
         public override async Task<List<string>> Execute()
         {
-            var result = await ((EmployerManager)extraditionManager).GetAnyEmployers();
+            var result = await ((EmployerManager)extraditionManager).GetResponse();
             if (result.IsSuccess)
             {
-                return result.EmployerResponse;
+                return result.Response;
             }
             return null;
         }

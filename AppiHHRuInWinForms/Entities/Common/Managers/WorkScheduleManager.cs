@@ -1,5 +1,6 @@
-﻿
-namespace AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
+﻿using AppiHHRuInWinForms.Entities.Common.Responses;
+
+namespace AppiHHRuInWinForms.Entities.Common.Managers;
 
 internal class WorkScheduleManager : ExtraditionManager
 {
@@ -18,21 +19,21 @@ internal class WorkScheduleManager : ExtraditionManager
         { "OTHER","Другое" }
     };
 
-    public async Task<GetAllDaySchedulePercentResponce> GetAllDaySchedulePercent()
+    public virtual async Task<GetManagersResponse> GetResponse()
     {
         var responce = await _httpClient.GetAnyVacancies();
         if (!responce.IsSuccess)
         {
             MessageBox.Show("Не удалось распарсить вакансии");
-            return new GetAllDaySchedulePercentResponce(false);
+            return new GetManagersResponse(false);
         }
         List<string> daySchedules = new();
-        foreach(var format in WorkScheduleFormats.Keys)
+        foreach (var format in WorkScheduleFormats.Keys)
         {
             var countAllDaySchefule = responce.Vacancies.Count(vacancy => vacancy.WorkingHoursByDays.Any(e => e.Id == format));
-            double allDayPercent = Math.Round((double)countAllDaySchefule / (double)responce.Vacancies.Count * 100,2);
+            double allDayPercent = Math.Round(countAllDaySchefule / (double)responce.Vacancies.Count * 100, 2);
             daySchedules.Add($"График {WorkScheduleFormats[format]} - {countAllDaySchefule} вакансий, процент от общего числа: {allDayPercent}");
         }
-        return new GetAllDaySchedulePercentResponce(true, daySchedules);
+        return new GetManagersResponse(true, daySchedules);
     }
 }

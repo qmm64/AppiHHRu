@@ -1,6 +1,7 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
+﻿using AppiHHRuInWinForms.Entities.Common.Responses;
+using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 
-namespace AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
+namespace AppiHHRuInWinForms.Entities.Common.Managers;
 
 public class SalaryManager:ExtraditionManager
 {
@@ -73,11 +74,11 @@ public class SalaryManager:ExtraditionManager
             salaries.Sort();
             if (salaries.Count % 2 != 0)
             {
-                return salaries[(salaries.Count/2)+1].ToString();
+                return salaries[salaries.Count/2+1].ToString();
             }
             else
             {
-                return ((salaries[(salaries.Count / 2) + 1] + salaries[(salaries.Count / 2)])/2).ToString();
+                return ((salaries[salaries.Count / 2 + 1] + salaries[salaries.Count / 2])/2).ToString();
             }
         }
         catch (Exception ex)
@@ -87,7 +88,7 @@ public class SalaryManager:ExtraditionManager
         }
     }
 
-    public async Task<GetSalaryResponse> GetAnySalaries()
+    public virtual async Task<GetManagersResponse> GetResponse()
     {
         try
         {
@@ -95,7 +96,7 @@ public class SalaryManager:ExtraditionManager
             if (!response.IsSuccess)
             {
                 MessageBox.Show("Не удалось рассчитать среднюю зарплату");
-                return new GetSalaryResponse(false);
+                return new GetManagersResponse(false);
             }
             var salaries = GetSalaries(response.Vacancies);
             List<string> salariesList = new List<string>();
@@ -103,12 +104,12 @@ public class SalaryManager:ExtraditionManager
             salariesList.Add($"Минимальная зарплата: {MinSalary(salaries)} руб/месяц");
             salariesList.Add($"Средняя зарплата: {ArrangeSalary(salaries)} руб/месяц");
             salariesList.Add($"Медианная зарплата: {MedianSalary(salaries)} руб/месяц");
-            return new GetSalaryResponse(true, salariesList);
+            return new GetManagersResponse(true, salariesList);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             MessageBox.Show($"Ошибка расчёта зарплат: {ex.Message}");
-            return new GetSalaryResponse(false);
+            return new GetManagersResponse(false);
         }
     }
 }

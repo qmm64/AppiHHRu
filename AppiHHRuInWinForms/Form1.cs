@@ -1,10 +1,7 @@
 using AppiHHRuInWinForms.Entities.Common;
 using AppiHHRuInWinForms.Entities.Common.IssuanceCommands;
-using AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP;
-using AppiHHRuInWinForms.Entities.Common.Responses.EmployerManagerP;
-using AppiHHRuInWinForms.Entities.Common.Responses.SalaryManagerP;
+using AppiHHRuInWinForms.Entities.Common.Managers;
 using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
-using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 
 namespace AppiHHRuInWinForms
 {

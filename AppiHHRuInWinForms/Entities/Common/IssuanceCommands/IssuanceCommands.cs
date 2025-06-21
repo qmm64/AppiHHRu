@@ -1,4 +1,4 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses;
+﻿using AppiHHRuInWinForms.Entities.Common.Managers;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {

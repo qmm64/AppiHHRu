@@ -1,5 +1,5 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses;
-using AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP;
+﻿using AppiHHRuInWinForms.Entities.Common.Managers;
+using AppiHHRuInWinForms.Entities.Common.Responses;
 using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
@@ -11,11 +11,6 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             this.extraditionManager = extraditionManager;
         }
 
-        public string AppendToURL()
-        {
-            throw new NotImplementedException();
-        }
-
         public override string Description()
         {
             return "По территории";
@@ -23,10 +18,10 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 
         public override async Task<List<string>> Execute()
         {
-            var result = await ((AreaManager)extraditionManager).GetAnyAreas();
+            var result = await ((AreaManager)extraditionManager).GetResponse();
             if (result.IsSuccess)
             {
-                return result.AreaResponse;
+                return result.Response;
             }
             return null;
         }

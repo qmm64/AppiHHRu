@@ -1,6 +1,7 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
+﻿using AppiHHRuInWinForms.Entities.Common.Responses;
+using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
 
-namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
+namespace AppiHHRuInWinForms.Entities.Common.Managers
 {
     internal class AreaManager : ExtraditionManager
     {
@@ -25,22 +26,22 @@ namespace AppiHHRuInWinForms.Entities.Common.Responses.AreaManagerP
             return areas;
         }
 
-        public async Task<GetAreaResponse> GetAnyAreas()
+        public virtual async Task<GetManagersResponse> GetResponse()
         {
             var responce = await _httpClient.GetAnyVacancies();
             if (!responce.IsSuccess)
             {
                 MessageBox.Show("Не удалось распарсить вакансии");
-                return new GetAreaResponse(false);
+                return new GetManagersResponse(false);
             }
             Dictionary<string, int> areas = GetTypesOfArea(responce.Vacancies);
             List<string> areaResponse = new();
             foreach (var key in areas.Keys)
             {
-                var procent = Math.Round((float)areas[key] / (float)responce.Vacancies.Count * 100,2);
+                var procent = Math.Round(areas[key] / (float)responce.Vacancies.Count * 100, 2);
                 areaResponse.Add($"{key} - {areas[key].ToString()} вакансий, процент от общего числа: {procent}%");
             }
-            return new GetAreaResponse(true, areaResponse);
+            return new GetManagersResponse(true, areaResponse);
         }
     }
 }

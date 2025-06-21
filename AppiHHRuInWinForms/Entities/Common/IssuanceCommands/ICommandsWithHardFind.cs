@@ -6,7 +6,6 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
     public interface ICommandsWithHardFind 
     {
         public GetParametersResponse GetParameters(GetAnyVacanciesResponse getAnyVacanciesResponse);
-        public string AppendToURL();
         public string ModificationOfURL(VacancyResponse vacancyResponse);
     }
 }

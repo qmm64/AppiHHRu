@@ -1,6 +1,6 @@
-﻿using AppiHHRuInWinForms.Entities.Common.Responses;
+﻿using AppiHHRuInWinForms.Entities.Common.Managers;
+using AppiHHRuInWinForms.Entities.Common.Responses;
 using AppiHHRuInWinForms.Entities.Common.Responses.VacancyResponse;
-using AppiHHRuInWinForms.Entities.Common.Responses.WorkScheduleManagerP;
 
 namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 {
@@ -11,11 +11,6 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
             this.extraditionManager = extraditionManager;
         }
 
-        public string AppendToURL()
-        {
-            throw new NotImplementedException();
-        }
-
         public override string Description()
         {
             return "По графику работы";
@@ -23,10 +18,10 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
 
         public override async Task<List<string>> Execute()
         {
-            var result = await ((WorkScheduleManager)extraditionManager).GetAllDaySchedulePercent();
+            var result = await ((WorkScheduleManager)extraditionManager).GetResponse();
             if (result.IsSuccess)
             {
-                return result.WorkSchedules;
+                return result.Response;
             }
             return null;
         }
@@ -40,7 +35,7 @@ namespace AppiHHRuInWinForms.Entities.Common.IssuanceCommands
                 {
                     foreach (var format in vacancy.WorkingHoursByDays)
                     {
-                        if (!uniqueWorkDaySchedules.ContainsKey(format.Id)/* && format.Name.Length==3*/)
+                        if (!uniqueWorkDaySchedules.ContainsKey(format.Id))
                         {
                             uniqueWorkDaySchedules[format.Id] = format;
                         }
